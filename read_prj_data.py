@@ -7,6 +7,5 @@ p = Proj(fromcrs.to_proj4())
 p
 rows = get_rows()
 for r in rows:
-    print r[5], r[6]
-    lon, lat = p(r[5], r[6], inverse=True);
+    lon, lat = p(r[5], r[6], inverse=True)
     print lon, lat
