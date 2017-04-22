@@ -2,28 +2,22 @@ import matplotlib.pyplot as plt
 from pyproj import Proj, transform
 from read_dbf_data import get_rows
 
-inProj = Proj(init='epsg:2913', preserve_units=True)
-outProj = Proj(init='epsg:4326')
-rows = get_rows()
-lon_orig = []
-lon_conv= []
-lat_orig = []
-lat_conv = []
-for r in rows:
-    lon_orig.append(r[5])
-    lat_orig.append(r[6])
-    lon, lat = transform(inProj, outProj, r[5], r[6])
-    lat_conv.append(lat)
-    lon_conv.append(lon)
-    print lat, lon
+#inProj = Proj(init='epsg:2913', preserve_units=True)
+#outProj = Proj(init='epsg:4326')
 
-'''
-plt.subplot(2, 2, 1)
-plt.plot(lon_orig, lon_conv, 'o')
-plt.title('longitude')
+fromcrs = pycrs.loader.from_file('Data/2012/NIJ2012_MAR01_DEC31.prj')
+p = Proj(fromcrs.to_proj4())
 
-plt.subplot(2, 2, 2)
-plt.plot(lat_orig, lat_conv, 'ro')
-plt.title('lattitude')
-plt.show()
-'''
+def get_lon_lat_from_xy(x_coor, y_coor):
+    lon, lat = p(x_coor, y_coor, inverse = True)
+    return lon, lat
+
+if __name__ == '__main__':
+    rows = get_rows()
+    for r in rows:
+        print r[5], r[6]
+        lon, lat = p(r[5], r[6], inverse = True)
+        print lon, lat
+
+    lon, lat = get_lon_lat_from_xy(7654753.0, 692448.0)
+    print lon, lat
