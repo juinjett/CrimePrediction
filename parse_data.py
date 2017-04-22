@@ -47,6 +47,7 @@ def xy_grid_to_xy_coor(x_grid, y_grid, x_number, y_number):
     y_number = y_precision*y_number + y_coor_min
     return x_number,y_number
 
+'''
 # parse date
 def date_to_number(date):
     list = date.split('/')
@@ -60,9 +61,10 @@ def date_to_number(date):
 
 def number_to_date(number):
     return '3/1/2012'
-
+'''
 
 # test
-rows_street_crime = get_rows_by_category('STREET CRIMES')
-for row in rows_street_crime:
-    print row
+if __name__ == '__main__':
+    rows_street_crime = get_rows_by_category('STREET CRIMES')
+    for row in rows_street_crime:
+        print row
