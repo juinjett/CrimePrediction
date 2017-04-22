@@ -1,5 +1,6 @@
 from read_dbf_data import *
 from constant_values import *
+from datetime import datetime,date
 
 # example
 # [0, u'DISORDER', 0, u'DISTURBANCE - PRIORITY', datetime.date(2012, 3, 1), 7641076.0, 684831.0, 4900.0]
@@ -47,24 +48,20 @@ def xy_grid_to_xy_coor(x_grid, y_grid, x_number, y_number):
     y_number = y_precision*y_number + y_coor_min
     return x_number,y_number
 
-'''
 # parse date
-def date_to_number(date):
-    list = date.split('/')
-    # initial number is 1/1/2012
-    number = 1001
-    month = int(list[0])
-    day = int(list[1])
-    year = int(list[2])
-
-    return month,day,year
-
-def number_to_date(number):
-    return '3/1/2012'
-'''
+def parse_date(date):
+    year = date.year;
+    month = date.month;
+    day = date.day;
+    # Monday, Tuesday, Thursday, ...
+    which_day = date.strftime("%w");
+    return month, day, year, which_day
 
 # test
 if __name__ == '__main__':
     rows_street_crime = get_rows_by_category('STREET CRIMES')
     for row in rows_street_crime:
         print row
+
+    # test date
+    print parse_date(rows_street_crime[0][4])
