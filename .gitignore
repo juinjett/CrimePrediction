@@ -105,3 +105,6 @@ ENV/
 include/
 bin/
 Data/
+
+# idea
+.idea/
