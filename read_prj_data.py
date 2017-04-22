@@ -1,11 +1,10 @@
 import pycrs
-from pyproj import Proj
+from pyproj import Proj, transform
 from read_dbf_data import get_rows
 
-fromcrs = pycrs.loader.from_file('Data/2012/NIJ2012_MAR01_DEC31.prj')
-p = Proj(fromcrs.to_proj4())
-p
+inProj = Proj(init='epsg:2913', preserve_units=True)
+outProj = Proj(init='epsg:4326')
 rows = get_rows()
 for r in rows:
-    lon, lat = p(r[5], r[6], inverse=True)
-    print lon, lat
+    lon, lat = transform(inProj, outProj, r[5], r[6])
+    print lat, lon
