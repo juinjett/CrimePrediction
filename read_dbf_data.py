@@ -1,4 +1,5 @@
 from constant_values import *
+from dbfread import DBF
 
 def date_to_number(date):
     list = date.split('/')
@@ -15,7 +16,6 @@ def number_to_date(number):
 
 
 def read_one_dbf_file(rows, path):
-    from dbfread import DBF
     table = DBF(path, load=True)
     times = 0
     #case_set = set([])
@@ -45,14 +45,15 @@ def read_one_dbf_file(rows, path):
 
 def get_rows():
     paths = []
-    paths.append('Data/2012/NIJ2012_MAR01_DEC31.dbf')
-    paths.append('Data/2013/NIJ2013_JAN01_DEC31.dbf')
+    # paths.append('Data/2012/NIJ2012_MAR01_DEC31.dbf')
+    # paths.append('Data/2013/NIJ2013_JAN01_DEC31.dbf')
     paths.append('Data/2014/NIJ2014_JAN01_DEC31.dbf')
-    paths.append('Data/2015/NIJ2015_JAN01_DEC31.dbf')
+    # paths.append('Data/2015/NIJ2015_JAN01_DEC31.dbf')
 
     rows = []
     for path in paths:
         read_one_dbf_file(rows, path)
     return rows
 
-get_rows()
+if __name__ == '__main__':
+    print get_rows()[0]

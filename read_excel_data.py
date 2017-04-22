@@ -1,8 +1,8 @@
+import xlrd
 import openpyxl as px
 import numpy as np
 
 def read_xlsx_file(fname):
-    import xlrd
     wb = xlrd.open_workbook(fname)
     sh = wb.sheet_by_index(0)
     for rownum in range(sh.nrows):
@@ -40,6 +40,8 @@ def read_xlsx(fname):
             rows.append(row)
             row = {}
     return rows
+
+print read_xlsx('data/NIJ2017_FEB28.xlsx')
 
 '''
 path = "Data/2012/NIJ2012_MAR01_DEC31_test.xlsx"
