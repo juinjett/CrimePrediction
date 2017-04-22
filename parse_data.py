@@ -19,8 +19,6 @@ def get_rows_by_category(category):
 # get parse rows
 def get_parsed_rows():
     rows = get_rows()
-    x_number = 100
-    y_number = 100
 
     # update x_coor, y_ coor with x_grid, y_grid
     for i in range(len(rows)):
@@ -54,7 +52,7 @@ def parse_date(date):
     month = date.month;
     day = date.day;
     # Monday, Tuesday, Thursday, ...
-    which_day = date.strftime("%w");
+    which_day = int(date.strftime("%w"));
     return month, day, year, which_day
 
 # test

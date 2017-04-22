@@ -2,19 +2,6 @@ import sys
 from constant_values import *
 from dbfread import DBF
 
-def date_to_number(date):
-    list = date.split('/')
-    # initial number is 1/1/2012
-    number = 1001
-    month = int(list[0])
-    day = int(list[1])
-    year = int(list[2])
-
-    return number
-
-def number_to_date(number):
-    return '3/1/2012'
-
 def read_one_dbf_file(rows, path):
     table = DBF(path, load=True)
     times = 0
