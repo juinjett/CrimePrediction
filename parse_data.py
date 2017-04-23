@@ -37,8 +37,17 @@ def get_training_data_by_category(category):
                         train_data.append(i_y)
                         train_data.append(cal_data[i][j][i_x][i_y])
                         train_datas.append(train_data)
+                        print train_data
+    # should append crime number == 0 areas to train_datas
     return train_datas
 
+def save_to_txt(train_datas):
+    f = open('save_train_datas.txt', 'w')
+    for train_data in train_datas:
+        for data in train_data:
+            f.write(str(data)+' ')
+        f.write('\n')
+    f.close()
 
 # output example:
 # [0, u'PERSON CRIME', 11, u'THREAT - WITH WEAPON *H', datetime.date(2016, 9, 29), 10, 7, 1801.0]
@@ -99,5 +108,5 @@ if __name__ == '__main__':
     # test date
     print parse_date(rows_street_crime[0][4])
     '''
-    train_dates = get_training_data_by_category('STREET CRIMES')
-
+    train_datas = get_training_data_by_category('STREET CRIMES')
+    save_to_txt(train_datas)
