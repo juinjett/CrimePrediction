@@ -36,12 +36,12 @@ def read_one_dbf_file(rows, path):
 def get_rows():
     paths = []
     paths.append('Data/2012/NIJ2012_MAR01_DEC31.dbf')
-    '''
+
     paths.append('Data/2013/NIJ2013_JAN01_DEC31.dbf')
     paths.append('Data/2014/NIJ2014_JAN01_DEC31.dbf')
     paths.append('Data/2015/NIJ2015_JAN01_DEC31.dbf')
     paths.append('Data/201609/NIJ2016_SEP01_SEP30.dbf')
-    '''
+
     rows = []
     for path in paths:
         read_one_dbf_file(rows, path)

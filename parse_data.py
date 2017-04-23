@@ -4,6 +4,7 @@ from date_related import *
 import numpy as np
 from constant_values import x_number, y_number
 from save_read_txt import *
+from getGridID import getGridID
 
 # example
 # [0, u'DISORDER', 0, u'DISTURBANCE - PRIORITY', datetime.date(2012, 3, 1), 7641076.0, 684831.0, 4900.0]
@@ -16,20 +17,22 @@ def get_training_data_by_category(category):
     rows_category = get_rows_by_category(category)
 
     # 4-dim matrix year month x y
-    cal_data = np.zeros([6, 13, x_number+1, y_number+1])
+    cal_data = np.zeros([6, 13, x_number, y_number])
     # year month x_gird y_grid crime_number
     for row in rows_category:
         month, day, year, which_day = parse_date(row[4])
-        x = row[5]
-        y = row[6]
-        #print year, month, x, y
-        cal_data[year - 2012][month][x][y] += 1
+        x_grid = row[5]
+        y_grid = row[6]
+        #print year, month, x_grid, y_grid
+        if x_grid >= x_number or y_grid >= y_number:
+            continue
+        cal_data[year - 2012][month][x_grid][y_grid] += 1
     # to be continued
     train_datas = []
     for i in range(6):
         for j in range(13):
-            for i_x in range(x_number+1):
-                for i_y in range(y_number+1):
+            for i_x in range(x_number):
+                for i_y in range(y_number):
                     if cal_data[i][j][i_x][i_y] > 0:
                         train_data = []
                         train_data.append(2012 + i)
@@ -38,7 +41,7 @@ def get_training_data_by_category(category):
                         train_data.append(i_y)
                         train_data.append(cal_data[i][j][i_x][i_y])
                         train_datas.append(train_data)
-                        print train_data
+                        #print train_data
     # should append crime number == 0 areas to train_datas
     return train_datas
 
@@ -66,30 +69,21 @@ def get_parsed_rows():
 
 # update x_coor, y_ coor with x_grid, y_grid
 def update_coord_by_grid(rows):
+    global x_grid_min
+    global x_grid_max
+    global y_grid_min
+    global y_grid_max
     for i in range(len(rows)):
-        x_grid,y_grid = xy_coor_to_xy_grid(rows[i][5], rows[i][6], x_number, y_number)
+        x_grid, y_grid = getGridID(rows[i][5], rows[i][6])
+        #print grid
+        if x_grid == -1 or y_grid == -1:
+            continue
         rows[i][5] = x_grid
+        #x_grid_min = min(x_grid_min, rows[i][5])
+        #x_grid_max = max(x_grid_max, rows[i][5])
         rows[i][6] = y_grid
-
-
-# split map into small squares
-def xy_coor_to_xy_grid(x_coor, y_coor, x_number, y_number):
-    x_precision = (x_coor_max - x_coor_min) / x_number
-    y_precision = (y_coor_max - y_coor_min) / y_number
-    x_grid = (x_coor - x_coor_min) / x_precision
-    y_grid = (y_coor - y_coor_min) / y_precision
-    x_grid = int(x_grid)
-    y_grid = int(y_grid)
-    return x_grid,y_grid
-
-def xy_grid_to_xy_coor(x_grid, y_grid, x_number, y_number):
-    # from x_grid, y_gird, we can't get accurate x_number, y_number
-    # this function is useless
-    x_precision = (x_coor_max - x_coor_min) / x_number
-    y_precision = (y_coor_max - y_coor_min) / y_number
-    x_number = x_precision*x_number + x_coor_min
-    y_number = y_precision*y_number + y_coor_min
-    return x_number,y_number
+        #y_grid_min = min(y_grid_min, rows[i][6])
+        #y_grid_max = max(y_grid_max, rows[i][6])
 
 # test
 if __name__ == '__main__':

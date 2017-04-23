@@ -32,14 +32,16 @@ number_to_final_case_type = {0:'DISTP',1:'DISTW',2:'VICE',3:'ASSLTP',4:'ASSLTW',
 91:'VEHSTP',92:'PROWLP',93:'BURGP',94:'SCHLW',95:'RSTLN',96:'ZERO',97:'GREAT',98:'HOSTGE',99:'SCHLET'}
 
 # 7547902
-x_coor_min = 7540000;
+x_coor_min = 7547902;
 # 7757364
-x_coor_max = 7760000;
+x_coor_max = 7757364;
 # 602723
-y_coor_min =  602000;
+y_coor_min =  602723;
 # 787753
-y_coor_max =  790000;
+y_coor_max =  787753;
 
 # how many grids
-x_number = 18
-y_number = 18
+# 0 - 159 include
+# 0 - 135 include
+x_number = 160
+y_number = 136
