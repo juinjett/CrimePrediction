@@ -6,6 +6,21 @@ from date_related import *
 # [0, u'DISORDER', 0, u'DISTURBANCE - PRIORITY', datetime.date(2012, 3, 1), 7641076.0, 684831.0, 4900.0]
 
 # get rows by crime category
+# get date by month
+def get_training_data_by_category(category):
+    rows_category = get_rows_by_category(category)
+
+    # year month x_gird y_grid crime_number
+    for row in rows_category:
+        month, day, year, which_day = parse_date(row[4])
+        x = row[5]
+        y = row[6]
+    # to be continued
+
+    
+
+# output example:
+# [0, u'PERSON CRIME', 11, u'THREAT - WITH WEAPON *H', datetime.date(2016, 9, 29), 10, 7, 1801.0]
 def get_rows_by_category(category):
     # input category is string
     rows = get_parsed_rows()
@@ -23,7 +38,6 @@ def get_parsed_rows():
     # update
     update_coord_by_grid(rows)
 
-    
 
     return rows
 
