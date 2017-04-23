@@ -1,0 +1,3 @@
+Sqrt[0.75]*5280 ＝ 4572.614131981836 //Max total forecasting area
+Sqrt[62500] ＝ 250 //Min unit cell
+4572.614131981836/250 ＝ 18.2905
