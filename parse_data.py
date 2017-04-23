@@ -3,6 +3,7 @@ from constant_values import *
 from date_related import *
 import numpy as np
 from constant_values import x_number, y_number
+from save_read_txt import *
 
 # example
 # [0, u'DISORDER', 0, u'DISTURBANCE - PRIORITY', datetime.date(2012, 3, 1), 7641076.0, 684831.0, 4900.0]
@@ -40,14 +41,6 @@ def get_training_data_by_category(category):
                         print train_data
     # should append crime number == 0 areas to train_datas
     return train_datas
-
-def save_to_txt(train_datas):
-    f = open('save_train_datas.txt', 'w')
-    for train_data in train_datas:
-        for data in train_data:
-            f.write(str(data)+' ')
-        f.write('\n')
-    f.close()
 
 # output example:
 # [0, u'PERSON CRIME', 11, u'THREAT - WITH WEAPON *H', datetime.date(2016, 9, 29), 10, 7, 1801.0]
