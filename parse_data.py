@@ -1,6 +1,6 @@
 from read_dbf_data import *
 from constant_values import *
-from datetime import datetime,date
+from date_related import *
 
 # example
 # [0, u'DISORDER', 0, u'DISTURBANCE - PRIORITY', datetime.date(2012, 3, 1), 7641076.0, 684831.0, 4900.0]
@@ -45,15 +45,6 @@ def xy_grid_to_xy_coor(x_grid, y_grid, x_number, y_number):
     x_number = x_precision*x_number + x_coor_min
     y_number = y_precision*y_number + y_coor_min
     return x_number,y_number
-
-# parse date
-def parse_date(date):
-    year = date.year;
-    month = date.month;
-    day = date.day;
-    # Monday, Tuesday, Thursday, ...
-    which_day = int(date.strftime("%w"));
-    return month, day, year, which_day
 
 # test
 if __name__ == '__main__':
