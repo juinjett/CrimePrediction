@@ -31,6 +31,8 @@ def read_one_dbf_file(rows, path):
         rows.append(row)
     return rows
 
+# output example,
+# [0, u'DISORDER', 0, u'DISTURBANCE - PRIORITY', datetime.date(2016, 9, 1), 7624094.0, 709457.0, 4200.0]
 def get_rows():
     paths = []
     # paths.append('Data/2012/NIJ2012_MAR01_DEC31.dbf')

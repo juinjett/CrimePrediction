@@ -20,12 +20,20 @@ def get_rows_by_category(category):
 def get_parsed_rows():
     rows = get_rows()
 
-    # update x_coor, y_ coor with x_grid, y_grid
+    # update
+    update_coord_by_grid(rows)
+
+    
+
+    return rows
+
+# update x_coor, y_ coor with x_grid, y_grid
+def update_coord_by_grid(rows):
     for i in range(len(rows)):
         x_grid,y_grid = xy_coor_to_xy_grid(rows[i][5], rows[i][6], x_number, y_number)
         rows[i][5] = x_grid
         rows[i][6] = y_grid
-    return rows
+
 
 # split map into small squares
 def xy_coor_to_xy_grid(x_coor, y_coor, x_number, y_number):
@@ -38,7 +46,7 @@ def xy_coor_to_xy_grid(x_coor, y_coor, x_number, y_number):
     return x_grid,y_grid
 
 def xy_grid_to_xy_coor(x_grid, y_grid, x_number, y_number):
-    # from x_grid, y_gird, we cann't get accurate x_number, y_number
+    # from x_grid, y_gird, we can't get accurate x_number, y_number
     # this function is useless
     x_precision = (x_coor_max - x_coor_min) / x_number
     y_precision = (y_coor_max - y_coor_min) / y_number
