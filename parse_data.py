@@ -18,7 +18,7 @@ def get_training_data_by_category(category):
     rows_category = get_rows_by_category(category)
 
     # 4-dim matrix year month x y
-    cal_data = np.zeros([6, 13, x_number, y_number])
+    cal_data = np.zeros([5, 13, x_number, y_number])
     # year month x_gird y_grid crime_number
     for row in rows_category:
         month, day, year, which_day = parse_date(row[4])
@@ -30,19 +30,24 @@ def get_training_data_by_category(category):
         cal_data[year - 2012][month][x_grid][y_grid] += 1
     # to be continued
     train_datas = []
-    for i in range(6):
-        for j in range(13):
+    for i in range(5):
+        for j in range(1, 13):
             for i_x in range(x_number):
                 for i_y in range(y_number):
-                    if cal_data[i][j][i_x][i_y] > 0:
-                        train_data = []
-                        train_data.append(2012 + i)
-                        train_data.append(j)
-                        train_data.append(i_x)
-                        train_data.append(i_y)
-                        train_data.append(cal_data[i][j][i_x][i_y])
-                        train_datas.append(train_data)
-                        #print train_data
+                    #if cal_data[i][j][i_x][i_y] > 0:
+
+                    # all the data start from 2012 3
+                    if i == 0 and j <= 2:
+                        continue
+
+                    train_data = []
+                    train_data.append(2012 + i)
+                    train_data.append(j)
+                    train_data.append(i_x)
+                    train_data.append(i_y)
+                    train_data.append(cal_data[i][j][i_x][i_y])
+                    train_datas.append(train_data)
+                    #print train_data
     # should append crime number == 0 areas to train_datas
     return train_datas
 
@@ -98,6 +103,5 @@ if __name__ == '__main__':
     print parse_date(rows_street_crime[0][4])
     '''
     train_datas = get_training_data_by_category(category)
-    #save_to_txt(train_datas)
+    #save_to_txt(train_datas, category)
     save_to_mat(train_datas, category)
-

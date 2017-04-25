@@ -11,6 +11,8 @@ def read_one_dbf_file(rows, path):
             break
         row = []
         # change category type to number
+        if not category_to_number.has_key(record['CATEGORY']):
+            continue
         row.append(category_to_number[record['CATEGORY']])
        # print category_number[record['CATEGORY']]
         row.append(record['CALL_GROUP'])
@@ -40,8 +42,12 @@ def get_rows():
     paths.append('Data/2013/NIJ2013_JAN01_DEC31.dbf')
     paths.append('Data/2014/NIJ2014_JAN01_DEC31.dbf')
     paths.append('Data/2015/NIJ2015_JAN01_DEC31.dbf')
+    paths.append('Data/201601/NIJ2016_JAN01_JUL31.dbf')
+    paths.append('Data/201608/NIJ2016_AUG01_AUG31.dbf')
     paths.append('Data/201609/NIJ2016_SEP01_SEP30.dbf')
-
+    paths.append('Data/201610/NIJ2016_OCT01_OCT31.dbf')
+    paths.append('Data/201611/NIJ2016_NOV01_NOV30.dbf')
+    paths.append('Data/201612/NIJ2016_DEC01_DEC31.dbf')
     rows = []
     for path in paths:
         read_one_dbf_file(rows, path)
