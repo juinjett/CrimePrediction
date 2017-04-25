@@ -5,6 +5,7 @@ import numpy as np
 from constant_values import x_number, y_number
 from save_read_txt import *
 from getGridID import getGridID
+from save_mat import *
 
 # example
 # [0, u'DISORDER', 0, u'DISTURBANCE - PRIORITY', datetime.date(2012, 3, 1), 7641076.0, 684831.0, 4900.0]
@@ -87,13 +88,16 @@ def update_coord_by_grid(rows):
 
 # test
 if __name__ == '__main__':
+    category = 'STREET CRIMES'
     '''
-    rows_street_crime = get_rows_by_category('STREET CRIMES')
+    rows_street_crime = get_rows_by_category(category)
     for row in rows_street_crime:
         print row
 
     # test date
     print parse_date(rows_street_crime[0][4])
     '''
-    train_datas = get_training_data_by_category('STREET CRIMES')
-    save_to_txt(train_datas)
+    train_datas = get_training_data_by_category(category)
+    #save_to_txt(train_datas)
+    save_to_mat(train_datas, category)
+
