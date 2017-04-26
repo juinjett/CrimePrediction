@@ -17,30 +17,34 @@ clc;
 % end
 % sum
 
+% train data
+x_train = train_datas(:, 1:4);
+y_train = train_datas(:, 5);
+% test data
+x_test = test_datas(:, 1:4);
+y_test = test_datas(:, 5);
 
-% %regression model, result is bad
+% %linear regression model, result is bad
 % % train
-% x_train = train_datas(:, 1:4);
-% y_train = train_datas(:, 5);
 % mdl = fitlm(x_train,y_train,'interactions');
 % % predict
-% x_test = test_datas(:, 1:4);
-% y_test = test_datas(:, 5);
 % y_predict = feval(mdl, x_test);
 % for i = 1:size(y_test, 1) 
 %     fprintf('real = %f, predict = %f\n',y_test(i), y_predict(i));
 % end
 
-
-% Multinomial logistic regression
+% Multinomial logistic regression, the code has problem
 % train
-x_train = train_datas(:, 1:4);
-y_train = train_datas(:, 5);
-B = mnrfit(x_train, y_train);
+% B = mnrfit(x_train, y_train);
 % predict
-x_test = test_datas(:, 1:4);
-y_test = test_datas(:, 5);
-y_predict = mnrval(B, x_test);
+% y_predict = mnrval(B, x_test);
+% for i = 1:size(y_test, 1) 
+%     fprintf('real = %f, predict = %f\n',y_test(i), y_predict(i));
+% end
+
+% Gaussian process
+gprMdl = fitrgp(x_train, y_train, 'KernelFunction','squaredexponential');
+y_predict = predict(gprMdl,x_test);
 for i = 1:size(y_test, 1) 
     fprintf('real = %f, predict = %f\n',y_test(i), y_predict(i));
 end
