@@ -1,5 +1,8 @@
 import matplotlib.pyplot as plt
+<<<<<<< HEAD
 import pycrs
+=======
+>>>>>>> master
 from pyproj import Proj, transform
 from read_dbf_data import get_rows
 
