@@ -17,7 +17,7 @@ clc;
 % end
 % sum
 
-<<<<<<< HEAD
+%<<<<<<< HEAD
 
 % %regression model, result is bad
 % % train
@@ -27,7 +27,7 @@ clc;
 % % predict
 % x_test = test_datas(:, 1:4);
 % y_test = test_datas(:, 5);
-=======
+%=======
 % train data
 x_train = train_datas(:, 1:4);
 y_train = train_datas(:, 5);
@@ -39,13 +39,13 @@ y_test = test_datas(:, 5);
 % % train
 % mdl = fitlm(x_train,y_train,'interactions');
 % % predict
->>>>>>> master
+%>>>>>>> master
 % y_predict = feval(mdl, x_test);
 % for i = 1:size(y_test, 1) 
 %     fprintf('real = %f, predict = %f\n',y_test(i), y_predict(i));
 % end
 
-<<<<<<< HEAD
+%<<<<<<< HEAD
 
 % Multinomial logistic regression
 % train
@@ -56,7 +56,7 @@ B = mnrfit(x_train, y_train);
 x_test = test_datas(:, 1:4);
 y_test = test_datas(:, 5);
 y_predict = mnrval(B, x_test);
-=======
+%=======
 % Multinomial logistic regression, the code has problem
 % train
 % B = mnrfit(x_train, y_train);
@@ -69,7 +69,7 @@ y_predict = mnrval(B, x_test);
 % Gaussian process
 gprMdl = fitrgp(x_train, y_train, 'KernelFunction','squaredexponential');
 y_predict = predict(gprMdl,x_test);
->>>>>>> master
+%>>>>>>> master
 for i = 1:size(y_test, 1) 
     fprintf('real = %f, predict = %f\n',y_test(i), y_predict(i));
 end
