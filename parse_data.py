@@ -32,8 +32,8 @@ def get_training_data_by_category(category):
     train_datas = []
     for i in range(5):
         for j in range(1, 13):
-            for i_x in range(x_number):
-                for i_y in range(y_number):
+            for i_x in range(1, x_number):
+                for i_y in range(1, y_number):
                     #if cal_data[i][j][i_x][i_y] > 0:
 
                     # all the data start from 2012 3

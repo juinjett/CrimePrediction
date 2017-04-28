@@ -5,7 +5,7 @@ import Tkinter
 from constant_values import x_coor_min,x_coor_max,y_coor_min,y_coor_max
 
 #cellUnit = 600
-cellUnit = 1200
+cellUnit = 1800
 myshp = open("Data/portland-police-districts/Portland_Police_Districts.shp","rb")
 mydbf = open("Data/portland-police-districts/Portland_Police_Districts.dbf","rb")
 r = shapefile.Reader(shp=myshp, dbf=mydbf)
@@ -47,7 +47,7 @@ def getGridID(x, y):
         return -1, -1
     x_grid = int((x - xMin)/cellUnit)
     y_grid = int((y - yMin)/cellUnit)
-    return x_grid, y_grid
+    return x_grid+1, y_grid+1
 
 #print getGridID(xMin, yMin)
 #print getGridID(xMax, yMax)

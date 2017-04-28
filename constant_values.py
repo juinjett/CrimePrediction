@@ -41,11 +41,19 @@ y_coor_min =  602723;
 y_coor_max =  787753;
 
 # how many grids
+# 600
 # 0 - 159 include
 # 0 - 135 include
 # x_number = 160
 # y_number = 136
+# 1200
 # 0 - 81
 # 0 - 68
-x_number = 82
-y_number = 69
+#x_number = 82
+#y_number = 69
+
+# 1800
+# 1 - 55
+# 1 - 46
+x_number = 56
+y_number = 47

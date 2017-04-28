@@ -65,15 +65,3 @@ y_predict = mnrval(B, x_test);
 % for i = 1:size(y_test, 1) 
 %     fprintf('real = %f, predict = %f\n',y_test(i), y_predict(i));
 % end
-
-% Gaussian process
-%x_train = x_train(1:100000, :);
-%y_train = y_train(1:100000, :);
-%x_test = x_test(1:20000, :);
-%y_test = y_test(1:20000, :);
-gprMdl = fitrgp(x_train, y_train, 'KernelFunction','squaredexponential');
-y_predict = predict(gprMdl,x_test);
-%>>>>>>> master
-for i = 1:size(y_test, 1) 
-    fprintf('real = %f, predict = %f\n',y_test(i), y_predict(i));
-end
