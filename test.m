@@ -43,6 +43,10 @@ y_test = test_datas(:, 5);
 % end
 
 % Gaussian process
+%x_train = x_train(1:100000, :);
+%y_train = y_train(1:100000, :);
+%x_test = x_test(1:20000, :);
+%y_test = y_test(1:20000, :);
 gprMdl = fitrgp(x_train, y_train, 'KernelFunction','squaredexponential');
 y_predict = predict(gprMdl,x_test);
 for i = 1:size(y_test, 1) 
