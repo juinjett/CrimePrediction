@@ -7,6 +7,7 @@ for i = 1:size(datas, 1)/50
     y_max = max(y_max, datas(i, 4));
 end
 sums = zeros(x_max, y_max);
+% how many months
 times = zeros(x_max, y_max);
 for i = 1:size(datas, 1)
     x = datas(i, 3);
@@ -32,7 +33,7 @@ std = zeros(x_max, y_max);
 for i = 1:x_max
     for j = 1:y_max
         if times(i, j) >= 1
-            std(i, j) = sqrt(x_minus_mean_square(i, j)/times(i, j));
+            std(i, j) = sqrt(x_minus_mean_square(i, j) / times(i, j));
         end
     end
 end
