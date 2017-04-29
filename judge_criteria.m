@@ -1,5 +1,7 @@
 function [result_PAI, result_PEI] = judge_criteria(X, Y_real, Y_pred)
+
 one_map = X(1:size(X,1)/58,3:4);
+
 % x_max = max(one_map(:,1));
 % y_max = max(one_map(:,2));
 
