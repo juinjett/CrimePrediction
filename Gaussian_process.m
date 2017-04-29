@@ -13,17 +13,19 @@ x_train = train_datas(:, 1:4);
 crime_number_train = train_datas(:, 5);
 % get y_train
 y_train = get_y_train(x_train, crime_number_train, mean_train, std_train); 
-%
 
 % test data
 x_test = test_datas(:, 1:4);
 crime_number_test = test_datas(:, 5);
 
-gprMdl = fitrgp(x_train, y_train, 'KernelFunction','squaredexponential');
+%%%%%%%%%%%%%%%%%% get gprMdl
+%gprMdl = fitrgp(x_train, y_train, 'KernelFunction','squaredexponential');
+%save gprMdl_GP_Anscombe_transform.mat gprMdl
+%%%%%%%%%%%%%%%%%%
 
-% save gprMdl
-save gprMdl_GP_Anscombe_transform.mat gprMdl
-
+%%%%%%%%%%%%%%%%%% load gprMdl
+load('gprMdl_GP_Anscombe_transform.mat');
+%%%%%%%%%%%%%%%%%%
 
 y_predict = predict(gprMdl, x_test);
 
@@ -34,9 +36,7 @@ for i = 1:size(y_predict, 1)
 end
 
 % print judege criteria
-[result_PAI, result_PEI] = judge_criteria(x_test, crime_number_test, y_predict);
-result_PAI
-result_PEI
+[result_PAI, result_PEI] = judge_criteria(x_test, crime_number_test, y_predict)
 end
 
 function y_train = get_y_train(x_train, crime_number_train, mean_train, std_train)

@@ -2,7 +2,7 @@ function [mean_data, std] = cal_grid_mean_std(datas)
 % is value
 x_max = 1;
 y_max = 1;
-for i = 1:size(datas, 1)/50
+for i = 1:size(datas, 1)
     x_max = max(x_max, datas(i, 3));
     y_max = max(y_max, datas(i, 4));
 end
