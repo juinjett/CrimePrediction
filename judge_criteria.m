@@ -23,8 +23,8 @@ forcasted_cells = round(total_cells*forcasted_total_ratio);
 
 %calculate number of forcasted crimes and total crimes
 Y = [Y_real, Y_pred];
-Y_pred_sorted = sort(Y, -2);
-Y_real_sorted = sort(Y, -1);
+Y_pred_sorted = sortrows(Y, -2);
+Y_real_sorted = sortrows(Y, -1);
 
 forcasted_crimes = sum(Y_pred_sorted(1:forcasted_cells, 1));
 max_obtain_crimes = sum(Y_real_sorted(1:forcasted_cells, 1));
