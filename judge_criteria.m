@@ -1,4 +1,4 @@
-function [result_PAI, result_PEI, overlap_cell_number] = judge_criteria(X, Y_real, Y_pred)
+function [result_PAI, result_PEI, overlap_cell_number, overlap_cell_number_ratio] = judge_criteria(X, Y_real, Y_pred)
 
 one_map = X(:,3:4);
 
@@ -33,6 +33,7 @@ M_real_sorted = sortrows(Y, -5);
 %calculate number of overlapping cells
 overlap_cell = intersect(M_pred_sorted(1:forcasted_cells, 3:4), M_real_sorted(1:forcasted_cells, 3:4));
 overlap_cell_number = size(overlap_cell,1);
+overlap_cell_number_ratio = overlap_cell_number/forcasted_cells;
 
 forcasted_crimes = sum(M_pred_sorted(1:forcasted_cells, 5));
 max_obtain_crimes = sum(M_real_sorted(1:forcasted_cells, 5));
