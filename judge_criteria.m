@@ -1,4 +1,4 @@
-function [result_PAI, result_PEI] = judge(X, Y_real, Y_pred)
+function [result_PAI, result_PEI] = judge_criteria(X, Y_real, Y_pred)
 one_map = X(1:size(X,1)/58,3:4);
 % x_max = max(one_map(:,1));
 % y_max = max(one_map(:,2));
@@ -16,7 +16,7 @@ forcasted_area = 0.75*5280*5280; %from challenge website
 forcasted_total_ratio = forcasted_area/total_area;
 
 total_cells = size(one_map,1);
-forcasted_cells = round(total_cell*forcasted_total_ratio);
+forcasted_cells = round(total_cells*forcasted_total_ratio);
 
 % nonzero_index = find(Y_pred(:,1));
 % nonzero = Y_pred(index,1);
