@@ -1,5 +1,6 @@
-function [result_PAI, result_PEI] = judge(X, Y_real, Y_pred)
-one_map = X(1:size(X,1)/58,3:4);
+function [result_PAI, result_PEI] = judge_criteria(X, Y_real, Y_pred)
+X_m = size(X, 1);
+one_map = X(1:floor(X_m/58),3:4);
 % x_max = max(one_map(:,1));
 % y_max = max(one_map(:,2));
 
@@ -16,15 +17,15 @@ forcasted_area = 0.75*5280*5280; %from challenge website
 forcasted_total_ratio = forcasted_area/total_area;
 
 total_cells = size(one_map,1);
-forcasted_cells = round(total_cell*forcasted_total_ratio);
+forcasted_cells = round(total_cells*forcasted_total_ratio);
 
 % nonzero_index = find(Y_pred(:,1));
 % nonzero = Y_pred(index,1);
 
 %calculate number of forcasted crimes and total crimes
 Y = [Y_real, Y_pred];
-Y_pred_sorted = sort(Y, -2);
-Y_real_sorted = sort(Y, -1);
+Y_pred_sorted = sortrows(Y, -2);
+Y_real_sorted = sortrows(Y, -1);
 
 forcasted_crimes = sum(Y_pred_sorted(1:forcasted_cells, 1));
 max_obtain_crimes = sum(Y_real_sorted(1:forcasted_cells, 1));

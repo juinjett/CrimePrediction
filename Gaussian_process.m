@@ -4,8 +4,8 @@ function Gaussian_process()
 [mean_train, std_train] = cal_grid_mean_std(train_datas);
 
 %%%%%%%%%%%%% used for debug, in order to save time
-train_datas = train_datas(1:40000, :);
-test_datas = test_datas(1:10000, :);
+%train_datas = train_datas(1:40000, :);
+%test_datas = test_datas(1:10000, :);
 %%%%%%%%%%%%%
 
 % train data
@@ -19,8 +19,12 @@ y_train = get_y_train(x_train, crime_number_train, mean_train, std_train);
 x_test = test_datas(:, 1:4);
 crime_number_test = test_datas(:, 5);
 
-
 gprMdl = fitrgp(x_train, y_train, 'KernelFunction','squaredexponential');
+
+% save gprMdl
+save gprMdl_GP_Anscombe_transform.mat gprMdl
+
+
 y_predict = predict(gprMdl, x_test);
 
 %>>>>>>> master
@@ -28,6 +32,11 @@ crime_number_predict = get_crime_number_predict(x_test, y_predict, mean_train, s
 for i = 1:size(y_predict, 1) 
     fprintf('real = %f, predict = %f\n',crime_number_test(i), crime_number_predict(i));
 end
+
+% print judege criteria
+[result_PAI, result_PEI] = judge_criteria(x_test, crime_number_test, y_predict);
+result_PAI
+result_PEI
 end
 
 function y_train = get_y_train(x_train, crime_number_train, mean_train, std_train)
