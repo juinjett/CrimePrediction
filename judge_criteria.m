@@ -13,9 +13,11 @@ one_map = X(:,3:4);
 % end
 
 %calulate areas and cells
-total_area = (7757364-7547902)*(787753-602723); %from contant_values.py
-forcasted_area = 0.75*5280*5280; %from challenge website
-forcasted_total_ratio = forcasted_area/total_area;
+%total_area = (7757364-7547902)*(787753-602723); %from contant_values.py
+%forcasted_area = 0.75*5280*5280; %from challenge website
+%forcasted_total_ratio = forcasted_area/total_area;
+
+forcasted_total_ratio = 0.01;
 
 total_cells = size(one_map,1);
 forcasted_cells = round(total_cells*forcasted_total_ratio);

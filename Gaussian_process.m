@@ -27,16 +27,39 @@ crime_number_test = test_datas(:, 5);
 load('gprMdl_GP_Anscombe_transform.mat');
 %%%%%%%%%%%%%%%%%%
 
-y_predict = predict(gprMdl, x_test);
 
-%>>>>>>> master
-crime_number_predict = get_crime_number_predict(x_test, y_predict, mean_train, std_train);
-for i = 1:size(y_predict, 1) 
-    fprintf('real = %f, predict = %f\n',crime_number_test(i), crime_number_predict(i));
+%%%%%%%% for all the test datas
+% y_predict = predict(gprMdl, x_test);
+%crime_number_predict = get_crime_number_predict(x_test, y_predict, mean_train, std_train);
+%for i = 1:size(y_predict, 1) 
+    %fprintf('real = %f, predict = %f\n',crime_number_test(i), crime_number_predict(i));
+%end
+%[result_PAI, result_PEI] = judge_criteria(x_test, crime_number_test, crime_number_predict)
+%%%%%%%%
+
+% get test data by month, 3 4 5 6 7 8 9 10 11 12 / 2016, predict
+for i = 3:3
+    for index = 1:size(test_datas, 1)
+        if test_datas(index, 1) == 2016 && test_datas(index, 2) == i
+            break;
+        end
+    end
+    % get i month data
+    x_month = test_datas(index:(index + 55*46 -1), 1:4);
+    crime_number_real = test_datas(index:(index + 55*46 -1), 5);
+    % predict
+    y_predict = predict(gprMdl, x_month);
+    crime_number_predict = get_crime_number_predict(x_month, y_predict, mean_train, std_train);
+    % print judege criteria
+    fprintf('at month %d:\n', i);
+    for ii = 1:size(y_predict, 1) 
+         fprintf('real = %f, predict = %f\n',crime_number_real(ii), crime_number_predict(ii));
+    end
+    [result_PAI, result_PEI] = judge_criteria(x_month, crime_number_real, crime_number_predict)
+    % heat map
+    show_single_heatmap([x_month, crime_number_real]);
+    show_single_heatmap([x_month, crime_number_predict]);
 end
-
-% print judege criteria
-[result_PAI, result_PEI] = judge_criteria(x_test, crime_number_test, y_predict)
 end
 
 function y_train = get_y_train(x_train, crime_number_train, mean_train, std_train)

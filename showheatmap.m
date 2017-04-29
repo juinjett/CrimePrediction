@@ -1,7 +1,7 @@
 clc;
 clear;
 load gprMdl_GP_zengjie.mat;
- showhotspot(2016,2,'STREET CRIMES.mat');
+showhotspot(2016,2,'STREET CRIMES.mat');
 predicths(2016,2,gprMdl);
 function hm = shotheatmap(year,month,data)
     load(data)
