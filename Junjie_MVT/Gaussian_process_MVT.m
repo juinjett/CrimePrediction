@@ -1,5 +1,5 @@
 function Gaussian_process()
-
+%%
 [train_datas, test_datas] = split_datas('STREET CRIMES');
 [mean_train, std_train] = cal_grid_mean_std(train_datas);
 
@@ -19,10 +19,11 @@ x_test = test_datas(:, 1:4);
 crime_number_test = test_datas(:, 5);
 
 %%%%%%%%%%%%%%%%%% get gprMdl
-%gprMdl = fitrgp(x_train, y_train, 'KernelFunction','squaredexponential');
-%save gprMdl_GP_Anscombe_transform_STREET_CRIMES.mat gprMdl
+gprMdl = fitrgp(x_train, y_train, 'KernelFunction','squaredexponential');
+save gprMdl_GP_Anscombe_transform_STREET_CRIMES.mat gprMdl
 %%%%%%%%%%%%%%%%%%
 
+%%
 %%%%%%%%%%%%%%%%%% load gprMdl
 load('gprMdl_GP_Anscombe_transform_STREET_CRIMES.mat');
 %%%%%%%%%%%%%%%%%%

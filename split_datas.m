@@ -23,7 +23,6 @@ elseif strcmp(category,'BURGLARY')
     load 'BURGLARY.mat'
 elseif strcmp(category,'OTHER')
     load 'OTHER.mat'
-
 end
 
 length = size(A, 1);
