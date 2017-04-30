@@ -1,6 +1,6 @@
 function Gaussian_process()
-%%
-[train_datas, test_datas] = split_datas('STREET CRIMES');
+
+[train_datas, test_datas] = split_datas('MOTOR VEHICLE THEFT');
 [mean_train, std_train] = cal_grid_mean_std(train_datas);
 
 %%%%%%%%%%%%% used for debug, in order to save time
@@ -19,13 +19,13 @@ x_test = test_datas(:, 1:4);
 crime_number_test = test_datas(:, 5);
 
 %%%%%%%%%%%%%%%%%% get gprMdl
-gprMdl = fitrgp(x_train, y_train, 'KernelFunction','squaredexponential');
-save gprMdl_GP_Anscombe_transform_STREET_CRIMES.mat gprMdl
+% gprMdl = fitrgp(x_train, y_train, 'KernelFunction','squaredexponential');
+% save gprMdl_GP_Anscombe_transform_MOTOR_VEHICLE_THEFT.mat gprMdl
 %%%%%%%%%%%%%%%%%%
 
-%%
+
 %%%%%%%%%%%%%%%%%% load gprMdl
-load('gprMdl_GP_Anscombe_transform_STREET_CRIMES.mat');
+load('gprMdl_GP_Anscombe_transform_MOTOR_VEHICLE_THEFT.mat');
 %%%%%%%%%%%%%%%%%%
 
 
@@ -40,7 +40,8 @@ load('gprMdl_GP_Anscombe_transform_STREET_CRIMES.mat');
 
 % get test data by month, 3 4 5 6 7 8 9 10 11 12 / 2016, predict
 % i is month, year is 2016
-for i = 3:3
+summary = [];
+for i = 3:12
     for index = 1:size(test_datas, 1)
         if test_datas(index, 1) == 2016 && test_datas(index, 2) == i
             break;
@@ -59,10 +60,20 @@ for i = 3:3
     end
     forcasted_total_ratio = 0.005;
     [result_PAI, result_PEI, overlap_cell_number, overlap_cell_number_ratio] = judge_criteria(x_month, crime_number_real, crime_number_predict, forcasted_total_ratio)
+    summary = [summary;[result_PAI, result_PEI, overlap_cell_number, overlap_cell_number_ratio]];
     % heat map
-    show_single_heatmap([x_month, crime_number_real]);
-    show_single_heatmap([x_month, crime_number_predict]);
+%     show_single_heatmap([x_month, crime_number_real]);
+%     show_single_heatmap([x_month, crime_number_predict]);
 end
+
+Monthes = {'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'}
+PAI = summary(:,1);
+PEI = summary(:,2);
+overlap_cell_number = summary(:,3);
+overlap_cell_number_ratio = summary(:,4);
+T = table(PAI, PEI, overlap_cell_number, overlap_cell_number_ratio, 'RowNames', Monthes)
+save results_GP_MVT T
+
 end
 
 function y_train = get_y_train(x_train, crime_number_train, mean_train, std_train)

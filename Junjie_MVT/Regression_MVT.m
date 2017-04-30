@@ -47,7 +47,8 @@ y_predict = feval(mdl, x_test);
 % for i = 1:size(y_test, 1) 
 %     fprintf('real = %f, predict = %f\n',y_test(i), y_predict(i));
 % end
-for i = 3:3
+summary = [];
+for i = 3:12
     for index = 1:size(test_datas, 1)
         if test_datas(index, 1) == 2016 && test_datas(index, 2) == i
             break;
@@ -65,10 +66,21 @@ for i = 3:3
     end
     forcasted_total_ratio = 0.1;
     [result_PAI, result_PEI, overlap_cell_number, overlap_cell_number_ratio] = judge_criteria(x_month, y_month, y_predict, forcasted_total_ratio)
+    summary = [summary;[result_PAI, result_PEI, overlap_cell_number, overlap_cell_number_ratio]];
     % heat map
-    show_single_heatmap([x_month, y_month]);
-    show_single_heatmap([x_month, y_predict]);
+%     show_single_heatmap([x_month, y_month]);
+%     show_single_heatmap([x_month, y_predict]);
+   
 end
+
+Monthes = {'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'}
+PAI = summary(:,1);
+PEI = summary(:,2);
+overlap_cell_number = summary(:,3);
+overlap_cell_number_ratio = summary(:,4);
+T = table(PAI, PEI, overlap_cell_number, overlap_cell_number_ratio, 'RowNames', Monthes)
+save results_Regression_MVT T
+
 
 % Multinomial logistic regression, the code has problem
 % train
