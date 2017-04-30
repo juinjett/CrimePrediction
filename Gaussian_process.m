@@ -20,11 +20,11 @@ crime_number_test = test_datas(:, 5);
 
 %%%%%%%%%%%%%%%%%% get gprMdl
 %gprMdl = fitrgp(x_train, y_train, 'KernelFunction','squaredexponential');
-%save gprMdl_GP_Anscombe_transform.mat gprMdl
+%save gprMdl_GP_Anscombe_transform_STREET_CRIMES.mat gprMdl
 %%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%% load gprMdl
-load('gprMdl_GP_Anscombe_transform.mat');
+load('gprMdl_GP_Anscombe_transform_STREET_CRIMES.mat');
 %%%%%%%%%%%%%%%%%%
 
 
@@ -38,6 +38,7 @@ load('gprMdl_GP_Anscombe_transform.mat');
 %%%%%%%%
 
 % get test data by month, 3 4 5 6 7 8 9 10 11 12 / 2016, predict
+% i is month, year is 2016
 for i = 3:3
     for index = 1:size(test_datas, 1)
         if test_datas(index, 1) == 2016 && test_datas(index, 2) == i
@@ -53,9 +54,10 @@ for i = 3:3
     % print judege criteria
     fprintf('at month %d:\n', i);
     for ii = 1:size(y_predict, 1) 
-         fprintf('real = %f, predict = %f\n',crime_number_real(ii), crime_number_predict(ii));
+         %fprintf('real = %f, predict = %f\n',crime_number_real(ii), crime_number_predict(ii));
     end
-    [result_PAI, result_PEI] = judge_criteria(x_month, crime_number_real, crime_number_predict)
+    forcasted_total_ratio = 0.005;
+    [result_PAI, result_PEI, overlap_cell_number, overlap_cell_number_ratio] = judge_criteria(x_month, crime_number_real, crime_number_predict, forcasted_total_ratio)
     % heat map
     show_single_heatmap([x_month, crime_number_real]);
     show_single_heatmap([x_month, crime_number_predict]);
