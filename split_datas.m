@@ -5,14 +5,25 @@ function [train_datas, test_datas] = split_datas(category)
 
 % split data
 % total length
-if category == 'STREET CRIMES'
+% if category == 'STREET CRIMES'
+%     load 'STREET CRIMES.mat'
+% elseif category == 'OTHER'
+%     load 'OTHER.mat'
+% elseif category == 'MOTOR VEHICLE THEFT'
+%     load 'MOTOR VEHICLE THEFT.mat'
+% elseif category == 'BURGLARY'
+%     load 'BURGLARY.mat'
+% end
+
+if strcmp(category,'STREET CRIMES')
     load 'STREET CRIMES.mat'
-elseif category == 'OTHER'
-    load 'OTHER.mat'
-elseif category == 'MOTOR VEHICLE THEFT'
+elseif strcmp(category,'MOTOR VEHICLE THEFT')
     load 'MOTOR VEHICLE THEFT.mat'
-elseif category == 'BURGLARY'
+elseif strcmp(category,'BURGLARY')
     load 'BURGLARY.mat'
+elseif strcmp(category,'OTHER')
+    load 'OTHER.mat'
+
 end
 
 length = size(A, 1);

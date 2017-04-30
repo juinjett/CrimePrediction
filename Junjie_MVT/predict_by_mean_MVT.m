@@ -1,7 +1,7 @@
 clear;
 clc;
 
-[train_datas, test_datas] = split_datas('STREET CRIMES');
+[train_datas, test_datas] = split_datas('MOTOR VEHICLE THEFT');
 [mean_train, std_train] = cal_grid_mean_std(train_datas);
 
 
