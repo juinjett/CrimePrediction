@@ -1,7 +1,7 @@
 clear;
 clc;
 
-[train_datas, test_datas] = split_datas('MOTOR VEHICLE THEFT');
+[train_datas, test_datas] = split_datas('BURGLARY');
 [mean_train, std_train] = cal_grid_mean_std(train_datas);
 
 
@@ -47,5 +47,5 @@ PEI = summary(:,2);
 overlap_cell_number = summary(:,3);
 overlap_cell_number_ratio = summary(:,4);
 T = table(PAI, PEI, overlap_cell_number, overlap_cell_number_ratio, 'RowNames', Monthes)
-save results_by_mean_MVT T
+save results_by_mean_BUR T
 

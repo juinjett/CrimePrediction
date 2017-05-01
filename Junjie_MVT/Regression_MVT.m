@@ -1,7 +1,7 @@
 clear;
 clc;
 
-[train_datas, test_datas] = split_datas('MOTOR VEHICLE THEFT');
+[train_datas, test_datas] = split_datas('BURGLARY');
 
 %%%%%%%%%%%%% used for debug, in order to save time
 %train_datas = train_datas(1:100000, :);
@@ -79,7 +79,7 @@ PEI = summary(:,2);
 overlap_cell_number = summary(:,3);
 overlap_cell_number_ratio = summary(:,4);
 T = table(PAI, PEI, overlap_cell_number, overlap_cell_number_ratio, 'RowNames', Monthes)
-save results_Regression_MVT T
+save results_Regression_BUR T
 
 
 % Multinomial logistic regression, the code has problem
