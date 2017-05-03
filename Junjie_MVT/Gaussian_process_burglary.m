@@ -72,7 +72,7 @@ PEI = summary(:,2);
 overlap_cell_number = summary(:,3);
 overlap_cell_number_ratio = summary(:,4);
 T = table(PAI, PEI, overlap_cell_number, overlap_cell_number_ratio, 'RowNames', Monthes)
-save results_GP_MVT T
+save results_GP_BUR T
 
 end
 
